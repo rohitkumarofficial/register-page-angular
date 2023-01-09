@@ -1,0 +1,246 @@
+<form class="sign-up-form" [formGroup]="registerForm">
+  <div class="flex-row">
+    <mat-form-field appearance="outline">
+      <mat-label>User Name</mat-label>
+      <input
+        matInput
+        formControlName="username"
+        (keydown.space)="$event.preventDefault()"
+      />
+      <mat-error *ngIf="registerForm.get('username')?.errors?.['required']"
+        >User name is required</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('username')?.errors?.['minlength']"
+        >User name must be greater than 5 characters</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('username')?.errors?.['maxlength']"
+        >User name must be less than 12 characters</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('username')?.errors?.['pattern']"
+        >User name must conatain atleast one Uppercase and one special
+        charater</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="flex-row gap-1">
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        type="password"
+        (keydown.space)="$event.preventDefault()"
+      />
+      <mat-error *ngIf="registerForm.get('password')?.errors?.['required']"
+        >Password is required</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('password')?.errors?.['minlength']"
+        >Password must be greater than 5 characters</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('password')?.errors?.['maxlength']"
+        >Password must be less than 12 characters</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('password')?.errors?.['pattern']"
+        >Password must conatain atleast one Uppercase and one special
+        charater</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        formControlName="confirmPassword"
+        type="password"
+        (keydown.space)="$event.preventDefault()"
+      />
+      <mat-error
+        *ngIf="registerForm.get('confirmPassword')?.errors?.['required']"
+        >Password is required</mat-error
+      >
+      <mat-error
+        *ngIf="registerForm.get('confirmPassword')?.errors?.['minlength']"
+        >Password must be greater than 5 characters</mat-error
+      >
+      <mat-error
+        *ngIf="registerForm.get('confirmPassword')?.errors?.['maxlength']"
+        >Password must be less than 12 characters</mat-error
+      >
+      <mat-error
+        *ngIf="registerForm.get('confirmPassword')?.errors?.['pattern']"
+        >Password must conatain atleast one Uppercase and one special
+        charater</mat-error
+      >
+      <mat-error
+        *ngIf="
+      (!registerForm.get('confirmPassword')?.errors?.['required'] && 
+        !registerForm.get('confirmPassword')?.errors?.['minlength'] &&
+        !registerForm.get('confirmPassword')?.errors?.['maxlength'] &&
+        !registerForm.get('confirmPassword')?.errors?.['pattern']) &&
+        registerForm.get('confirmPassword')?.errors?.['passwordNotMatched']"
+        >Password and Confirm Password must be match.</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="flex-row gap-1">
+    <mat-form-field appearance="outline">
+      <mat-label>Age</mat-label>
+      <input matInput formControlName="age" type="number" />
+      <mat-error *ngIf="registerForm.get('age')?.errors?.['required']"
+        >Age is required</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('age')?.errors?.['min']"
+        >Age must be greater than 18</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Date Of Birth</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dob" [min]="minDate" readonly/>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="flex-row gap-1">
+    <mat-form-field appearance="outline">
+      <mat-label>Photo File Name</mat-label>
+      <input matInput formControlName="photoFileName" />
+      <mat-error *ngIf="registerForm.get('photoFileName')?.errors?.['pattern']"
+        >Please enter a valid file name with supported extension (.jpg | .jpeg | .gif)</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="flex-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <input matInput type="number" formControlName="phone" />
+      <mat-error *ngIf="registerForm.get('phone')?.errors?.['required']"
+        >Phone is required</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('phone')?.errors?.['pattern']"
+        >Please enter 10 digit phone number</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="flex-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Email Address</mat-label>
+      <input matInput type="email" formControlName="email" />
+      <mat-error *ngIf="registerForm.get('email')?.errors?.['required']"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('email')?.errors?.['pattern']"
+        >Invalid Email Address</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="flex-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Web Site Url</mat-label>
+      <input matInput formControlName="webSiteUrl" type="url" />
+      <mat-error *ngIf="registerForm.get('webSiteUrl')?.errors?.['required']"
+        >Website Url is required</mat-error
+      >
+      <mat-error *ngIf="registerForm.get('webSiteUrl')?.errors?.['pattern']"
+        >Please enter a valid website Url</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div class="gender-form-field flex-col">
+    <mat-label>Gender</mat-label>
+    <mat-radio-group
+      aria-label="Select Gender"
+      class="flex-col"
+      formControlName="gender"
+    >
+      <mat-radio-button value="Male">Male</mat-radio-button>
+      <mat-radio-button value="Female">Female</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="flex-row gap-1">
+    <mat-form-field appearance="outline">
+      <mat-label>Country</mat-label>
+      <mat-select
+        formControlName="country"
+        (selectionChange)="onCountrySelectionChange($event.value)"
+        placeholder="Please Choose"
+      >
+        <mat-option
+          *ngFor="let country of countries$ | async"
+          [value]="country.name"
+          >{{ country.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>State</mat-label>
+      <mat-select
+        formControlName="state"
+        (selectionChange)="onStateSelectionChange($event.value)"
+        placeholder="Please Choose"
+      >
+        <mat-option
+          *ngFor="let state of states$ | async"
+          [value]="state.name"
+          >{{ state.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="flex-row gap-1">
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <mat-select formControlName="city" placeholder="Please Choose">
+        <mat-option *ngFor="let city of cities$ | async" [value]="city.name">{{
+          city.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Postal Code</mat-label>
+      <input matInput formControlName="postalCode" type="number"/>
+      <mat-error
+      *ngIf="registerForm.get('postalCode')?.errors?.['required']"
+      >Postal Code is required</mat-error
+    >
+    <mat-error
+      *ngIf="registerForm.get('postalCode')?.errors?.['minlength'] || registerForm.get('postalCode')?.errors?.['maxlength']"
+      >Postal code must be 5 digit</mat-error
+    >
+    <mat-error
+      *ngIf="registerForm.get('postalCode')?.errors?.['pattern']"
+      >Postal code must be between 500000 to 599999</mat-error
+    >
+    </mat-form-field>
+  </div>
+
+  <div class="term-checkbox-form-field flex-row">
+    <mat-checkbox
+      formControlName="terms"
+      (change)="onTermCheckboxChange($event.checked)"
+      >Site Terms Conditions</mat-checkbox
+    >
+  </div>
+
+  <div class="flex-row justify-end">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="signUp()"
+      [disabled]="registerForm.invalid"
+    >
+      SignUp
+    </button>
+  </div>
+</form>
